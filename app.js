@@ -80,3 +80,16 @@
   });
   window.RC = RC;
 })();
+  RC.wa = function () {
+    var r = document.getElementById('gift-ref'), n = document.getElementById('gift-name');
+    if (!r || !r.value.trim()) { r && r.focus(); return; }
+    var msg = 'Hello Hedi! I sent a gift via MoneyGram for retiree.bond — Reference: ' + r.value.trim() +
+      ((n && n.value.trim()) ? ' — from ' + n.value.trim() : '') + '. Thank you for the countdown!';
+    window.open('https://wa.me/21693816607?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    var b = document.getElementById('gift-send');
+    if (b) b.addEventListener('click', function () { RC.wa(); });
+    var r = document.getElementById('gift-ref');
+    if (r) r.addEventListener('keydown', function (e) { if (e.key === 'Enter') RC.wa(); });
+  });
