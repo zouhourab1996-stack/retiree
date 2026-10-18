@@ -12,7 +12,7 @@
   };
   RC.weekendDaysUntil = function (t) { return Math.max(0, RC.daysUntil(t) - RC.workdaysUntil(t)); };
   RC.paychecksUntil = function (t) { var n = new Date(); n.setHours(0,0,0,0); return Math.max(0, Math.floor((t - n) / (14 * DAY))); };
-  RC.fraFor = function (y) { var t = { 1955: [66, 2], 1956: [66, 4], 1957: [66, 6], 1958: [66, 8], 1959: [66, 10] }; return t[y] || [67, 0]; };
+  RC.fraFor = function (y) { if (y >= 1943 && y <= 1954) return [66, 0]; var t = { 1955: [66, 2], 1956: [66, 4], 1957: [66, 6], 1958: [66, 8], 1959: [66, 10] }; return t[y] || [67, 0]; };
   RC.fraDate = function (b) {
     var f = RC.fraFor(b.getFullYear());
     var m = b.getMonth() + f[1], y = b.getFullYear() + f[0];
