@@ -13,10 +13,23 @@
   RC.weekendDaysUntil = function (t) { return Math.max(0, RC.daysUntil(t) - RC.workdaysUntil(t)); };
   RC.paychecksUntil = function (t) { var n = new Date(); n.setHours(0,0,0,0); return Math.max(0, Math.floor((t - n) / (14 * DAY))); };
   RC.fraFor = function (y) { if (y >= 1943 && y <= 1954) return [66, 0]; var t = { 1955: [66, 2], 1956: [66, 4], 1957: [66, 6], 1958: [66, 8], 1959: [66, 10] }; return t[y] || [67, 0]; };
-  RC.fraDate = function (b) {
-    var f = RC.fraFor(b.getFullYear());
-    var m = b.getMonth() + f[1], y = b.getFullYear() + f[0];
-    return new Date(y + Math.floor(m / 12), m % 12, 1);
+  // Social Security counts you as reaching an age on the day BEFORE the anniversary (20 CFR 404.2(c)(4)).
+  // SSA table notes: born on January 1 -> use the previous year's row; born on the 1st -> as if born in the previous month;
+  // you must be 62 for the entire month to be paid for it.
+  RC.effYear = function (b) { return (b.getMonth() === 0 && b.getDate() === 1) ? b.getFullYear() - 1 : b.getFullYear(); };
+  RC.addMonthsClamped = function (b, n) {
+    var t = b.getFullYear() * 12 + b.getMonth() + n, y = Math.floor(t / 12), m = t % 12;
+    var last = new Date(y, m + 1, 0).getDate();
+    return new Date(y, m, Math.min(b.getDate(), last));
+  };
+  RC.fraAttained = function (b) {
+    var f = RC.fraFor(RC.effYear(b)), a = RC.addMonthsClamped(b, f[0] * 12 + f[1]);
+    return new Date(a.getFullYear(), a.getMonth(), a.getDate() - 1);
+  };
+  RC.fraDate = function (b) { var a = RC.fraAttained(b); return new Date(a.getFullYear(), a.getMonth(), 1); };
+  RC.claim62Month = function (b) {
+    var a = RC.addMonthsClamped(b, 62 * 12); a = new Date(a.getFullYear(), a.getMonth(), a.getDate() - 1);
+    return a.getDate() === 1 ? new Date(a.getFullYear(), a.getMonth(), 1) : new Date(a.getFullYear(), a.getMonth() + 1, 1);
   };
   RC.monthName = function (d) { return ['January','February','March','April','May','June','July','August','September','October','November','December'][d.getMonth()]; };
   RC.fmt = function (n) { return n.toLocaleString('en-US'); };
@@ -64,9 +77,9 @@
     var input = document.getElementById('rc-birth');
     function run(v) {
       if (!v) return;
-      var b = RC.parseYMD(v), t = RC.fraDate(b);
+      var b = RC.parseYMD(v), t = RC.fraDate(b), f = RC.fraFor(RC.effYear(b));
       var el = document.getElementById('rc-fra');
-      if (el) el.innerHTML = 'Your full retirement age is <b>' + t.getFullYear() + '</b> — you reach it in <b>' + RC.monthName(t) + ' ' + t.getFullYear() + '</b>. Counting from today:';
+      if (el) el.innerHTML = 'Your full retirement age is <b>' + f[0] + (f[1] ? ' and ' + f[1] + ' months' : '') + '</b> — you reach it in <b>' + RC.monthName(t) + ' ' + t.getFullYear() + '</b>. Counting from today:';
       RC.renderCount(t); RC.tickClock(t);
       var box = document.getElementById('rc-live'); if (box) box.style.display = 'block';
     }
