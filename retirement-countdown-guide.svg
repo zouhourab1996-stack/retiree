@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+<title id="t">Days Until Retirement — Countdown Planning Guide</title>
+<desc id="d">A calm sunrise over a horizon beside a calendar and clock, representing a planned retirement date.</desc>
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#183f48"/><stop offset="1" stop-color="#e5a56e"/></linearGradient>
+ <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe8a5"/><stop offset="1" stop-color="#efad65"/></linearGradient>
+</defs>
+<rect width="1200" height="630" rx="34" fill="#f5f0e5"/>
+<rect x="0" y="0" width="1200" height="420" rx="34" fill="url(#sky)"/>
+<circle cx="850" cy="255" r="112" fill="url(#sun)"/>
+<path d="M0 375 Q180 310 370 390 T760 365 T1200 350 V630 H0Z" fill="#315b4b"/>
+<path d="M0 440 Q230 390 460 455 T920 430 T1200 420 V630 H0Z" fill="#203e37"/>
+<g transform="translate(120 115)">
+ <rect x="0" y="0" width="250" height="300" rx="24" fill="#fffaf0" stroke="#d6c7aa" stroke-width="8"/>
+ <rect x="0" y="0" width="250" height="68" rx="24" fill="#b86f4d"/>
+ <path d="M0 45 H250" stroke="#b86f4d" stroke-width="45"/>
+ <path d="M58 -18 V34 M192 -18 V34" stroke="#fffaf0" stroke-width="14" stroke-linecap="round"/>
+ <g fill="#315b4b"><rect x="36" y="103" width="38" height="34" rx="7"/><rect x="106" y="103" width="38" height="34" rx="7"/><rect x="176" y="103" width="38" height="34" rx="7"/><rect x="36" y="164" width="38" height="34" rx="7"/><rect x="106" y="164" width="38" height="34" rx="7"/><rect x="176" y="164" width="38" height="34" rx="7"/><rect x="36" y="225" width="38" height="34" rx="7"/><rect x="106" y="225" width="38" height="34" rx="7"/></g>
+ <rect x="176" y="225" width="38" height="34" rx="7" fill="#e5a56e"/>
+</g>
+<g transform="translate(745 385)">
+ <circle r="105" fill="#fffaf0" stroke="#d7c5a4" stroke-width="12"/>
+ <circle r="82" fill="none" stroke="#b86f4d" stroke-width="5" stroke-dasharray="3 14"/>
+ <path d="M0 -62 V0 L47 30" fill="none" stroke="#315b4b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+ <circle r="10" fill="#b86f4d"/>
+</g>
+<text x="420" y="145" fill="#fffaf0" font-family="Georgia,serif" font-size="54" font-weight="bold">Your next chapter</text>
+<text x="420" y="205" fill="#fffaf0" font-family="Arial,sans-serif" font-size="27">Days · Workdays · Paychecks</text>
+<text x="120" y="555" fill="#fffaf0" font-family="Georgia,serif" font-size="36" font-weight="bold">retiree.bond</text>
+<text x="120" y="592" fill="#f3d7b6" font-family="Arial,sans-serif" font-size="20">A practical guide to counting down with confidence</text>
+</svg>
