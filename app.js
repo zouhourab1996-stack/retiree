@@ -60,6 +60,11 @@
     var saved = null;
     try { saved = localStorage.getItem('retiree-date'); } catch (e) {}
     var input = document.getElementById('rc-date');
+    if (input) {
+      var today = new Date();
+      var minDate = [today.getFullYear(), String(today.getMonth() + 1).padStart(2, '0'), String(today.getDate()).padStart(2, '0')].join('-');
+      input.min = minDate;
+    }
     function run(v) {
       if (!v) return;
       try { localStorage.setItem('retiree-date', v); } catch (e) {}
@@ -93,7 +98,7 @@
   });
   window.RC = RC;
 })();
-  RC.wa = function () {
+  window.RC.wa = function () {
     var r = document.getElementById('gift-ref'), n = document.getElementById('gift-name');
     if (!r || !r.value.trim()) { r && r.focus(); return; }
     var msg = 'Hello Hedi! I sent a gift via MoneyGram for retiree.bond — Reference: ' + r.value.trim() +
@@ -102,7 +107,7 @@
   };
   document.addEventListener('DOMContentLoaded', function () {
     var b = document.getElementById('gift-send');
-    if (b) b.addEventListener('click', function () { RC.wa(); });
+    if (b) b.addEventListener('click', function () { window.RC.wa(); });
     var r = document.getElementById('gift-ref');
-    if (r) r.addEventListener('keydown', function (e) { if (e.key === 'Enter') RC.wa(); });
+    if (r) r.addEventListener('keydown', function (e) { if (e.key === 'Enter') window.RC.wa(); });
   });
